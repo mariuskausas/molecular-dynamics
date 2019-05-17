@@ -1,0 +1,60 @@
+; VHP-based test system: sample mdp file for XS-guided SBM simulations in GROMACS5
+;
+; Run Control
+integrator	            = sd        ;leap-frog algorithm integrator for integrating Newton's eq.
+dt		                = 0.0005    ;time step in ps
+nsteps		            = 2000000   ;number of steps
+;
+; XS parameters
+waxs-type               = Debye     ;Calculate scattering intensities and refinement forces using Debye eq.
+waxs-fc                 = 10e-12    ;coupling constant for SAXS refinement 10e-12
+waxs-nstout             = 1         ;period for writing calculated scattering intesities to file
+waxs-nstcalc            = 10        ;period for calculation and appplication of SAXS forces
+debye-alpha-mode        = 0         ;Keep alpha constant at (debye-alpha-min + debye-alpha-max)/2.
+debye-alpha-min         = 1.0
+debye-alpha-max         = 1.0
+;
+; Output Control
+nstxout		            = 4000000   ;number of steps elapsing between writing coordinates to output trajectory file (500)
+nstvout		            = 4000000   ;number of steps elapsing between writing velocities to output trajectory file
+nstxout-compressed      = 100       ;number of steps elapsing between writing position coordinates using lossy compression
+compressed-x-grps       = Protein   ;group(s) to write to compressed trajectory file (default: whole system)
+nstcalcenergy           = 105       ;number of steps elapsing between calculation of energies
+nstenergy	            = 105       ;number of steps elapsing between writing energies to energy file, multiple of nstcalcenergy
+nstlog		            = 100       ;number of steps elapsing between writing energies to log file
+nstcomm                 = 105       ;frequency for center of mass motion removal
+;
+; Neighbor Searching
+cutoff-scheme           = group     ;Generate pair list for groups of atoms.
+ns_type                 = grid      ;Make grid in box, only check atoms in neighboring grid cells when constructing new neighbor list every nstlist steps.
+nstlist                 = 15        ;frequency to update neighbor list
+pbc		                = xyz       ;periodic BC in all directions
+;
+; Electrostatics
+coulombtype	            = Cut-off   ;twin range cut-off
+rcoulomb	            = 1.5       ;distance of Coulomb cut-off
+;
+; VdW
+vdwtype                 = Cut-off   ;twin range cut-off
+rvdw		            = 1.5       ;distance of VdW cut-off
+;
+; Temperature Coupling
+tcoupl		            = V-rescale ;temperature coupling using velocity rescaling with a stochastic term
+tc-grps                 = Protein   ;group(s) to couple separately to temperature bath
+tau_t		            = 0.5       ;time constant for coupling
+ref_t		            = 90        ;reference temperature for coupling
+;
+; Pressure Coupling
+pcoupl                  = no        ;no pressure coupling
+;
+; Velocity Generation
+gen_vel		            = yes       ;velocity generation according to Maxwell distribution
+gen_temp                = 90        ;temperature for Maxwell distribution
+gen_seed                = -1        ;initialize random generator for random velocities; -1 => use pseudo random seed
+;
+; Bonds
+continuation	        = no        ;Apply constraints to start configuration, do not reset shells.
+constraint_algorithm    = lincs     ;LINear Constraint Solver
+constraints	            = all-bonds ;Convert all bonds to constraints.
+lincs_iter	            = 1         ;number of iterations for LINCS
+lincs_order	            = 4         ;number of matrices in expansion for matrix inversion of LINCS
