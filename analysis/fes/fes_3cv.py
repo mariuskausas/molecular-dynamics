@@ -93,4 +93,3 @@ def three_variable_contour_count(cv1, cv2, cv3, bins, output_name, weights=None)
     plot_2D_contour_count(H, J, xedges, yedges, output_name)
 
     return
-
