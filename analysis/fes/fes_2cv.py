@@ -1,6 +1,16 @@
+d = """
+=============================================
+Generate a 2D free energy surface of two collective variables.
+
+Before use:
+- Install numpy and matplotlib
+
+Marius Kausas					   2019 11 18
+=============================================
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 def prepare_two_cvs(cv1, cv2, bins, weights=None):
