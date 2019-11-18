@@ -27,7 +27,6 @@ def prepare_three_cvs(cv1, cv2, cv3, bins, weights):
     H, xedges, yedges = np.histogram2d(cv1, cv2, bins=(xedges, yedges), weights=weights, normed=True)
     
     ## Generate a 2D histogram for the third collective variable
-
     # Stack collective variables
     stacked_cvs = np.vstack((cv1, cv2, cv3)).T
 
