@@ -60,7 +60,8 @@ def plot_2D_contour_count(H, J, xedges, yedges, output_name):
     fig = plt.figure(figsize=[6, 4])
     ax = fig.add_subplot(111)
     
-    imshow = ax.imshow(J, interpolation='nearest', origin='low', extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", cmap="PRGn")
+    imshow = ax.imshow(J, interpolation='nearest', origin='low',
+		       extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", cmap="PRGn")
     fig.colorbar(imshow, ax = ax)
     
     contour = ax.contour(H, extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], cmap="Spectral", levels=10, linewidths=1)
