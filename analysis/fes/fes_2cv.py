@@ -60,4 +60,3 @@ def two_variable_fes(path_to_cv1, path_to_cv2, bins, output_name, weights=None):
     plot_2Dfes(H, xedges, yedges, output_name)
 
     return
-
