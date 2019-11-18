@@ -1,6 +1,17 @@
+d = """
+=============================================
+Generate a 2D free energy surface of two collective variables as a contour plot.
+In addition, overlay a count histogram for a third collective variable.
+
+Before use:
+- Install numpy and matplotlib
+
+Marius Kausas					   2019 11 18
+=============================================
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 def prepare_three_cvs(cv1, cv2, cv3, bins, weights):
