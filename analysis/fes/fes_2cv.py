@@ -50,7 +50,7 @@ def plot_2D_fes(H, xedges, yedges, output_name):
     plt.show()
 
 
-def two_variable_fes(path_to_cv1, path_to_cv2, bins, output_name, weights=None):
+def two_variable_fes(cv1, cv2, bins, output_name, weights=None):
     """ Plot 2D FES."""
 
     # Check if the weights are provided
