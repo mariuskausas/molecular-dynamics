@@ -57,7 +57,7 @@ def two_variable_fes(cv1, cv2, bins, output_name, weights=None):
     if weights is not None:
         weights = load_weights(weights)
 
-    H, xedges, yedges = convert_fes(cv1, cv2, bins, weights)
-    plot_2Dfes(H, xedges, yedges, output_name)
+    H, xedges, yedges = prepare_two_cvs(cv1, cv2, bins, weights)
+    plot_2D_fes(H, xedges, yedges, output_name)
 
     return
