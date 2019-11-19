@@ -42,11 +42,16 @@ def prepare_two_cvs(cv1, cv2, bins, weights=None):
 def plot_2D_fes(H, xedges, yedges, output_name):
     """ Helper plotting function."""
     
-    plt.figure(figsize=(8, 7))
-    plt.imshow(H, interpolation='nearest', origin='low',
+    fs = 22
+    fig = plt.figure(figsize=[6, 4])
+    ax = fig.add_subplot(111)
+    
+    imshow = ax.imshow(H, interpolation='nearest', origin='low',
             extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]], aspect="auto", cmap="Spectral")
+    fig.colorbar(imshow, ax = ax)
+    
+    fig.tight_layout()
     plt.savefig(output_name + ".png", dpi=600)
-    plt.colorbar()
     plt.show()
 
 
