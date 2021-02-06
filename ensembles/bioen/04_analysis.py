@@ -75,7 +75,7 @@ def extract_wopt_cumsum(bioen_data):
 
 
 def visualize_chi2_skl(bioen_data):
-	""" Plot reduced reduced chi-squared values against relative entropy as a function of theta."""
+	""" Plot reduced reduced chi-squared values versus relative entropy as a function of theta."""
 	fs = 30
 	fig = plt.figure(figsize=[12, 4])
 	ax = fig.add_subplot(111)
@@ -96,6 +96,47 @@ def visualize_chi2_skl(bioen_data):
 
 	plt.tight_layout()
 	plt.savefig("{}/bioen_chi2_skl.png".format(path_output_analysis), dpi=400)
+
+	return
+
+
+def kish_score(weights):
+	""" Calculate Kish score."""
+	numerator = np.power(weights.sum(), 2)
+	denominator = np.power(weights, 2).sum()
+	return numerator / denominator
+
+
+def kish_score_log_normalized(weights):
+	""" Calculate log normalized Kish score."""
+	size = weights.shape[0]
+	normalized_kish = kish_score(weights) / size
+	return np.log10(normalized_kish)
+
+
+def visualize_chi2_kish(bioen_data):
+	""" Plot reduced chi-squared versus log normalized Kish scores as a function of theta."""
+	thetas = list(bioen_data.keys())
+	thetas.sort()
+	thetas.reverse()
+
+	chi2reds = []
+	kish_scores = []
+	for theta in thetas:
+		kish_scores.append(kish_score_log_normalized(bioen_data[theta]["wopt"]))
+		chi2reds.append(bioen_data[theta]['chi2'] / bioen_data[theta]['nrestraints'])
+
+	fs = 22
+	fig = plt.figure(figsize=[6, 4])
+	ax = fig.add_subplot(111)
+
+	for idx, theta in enumerate(thetas):
+		ax.scatter(kish_scores[idx], chi2reds[idx], marker='.', s=160, label=theta)
+	ax.legend(ncol=2, fontsize=10)
+	ax.set_xlabel('log normalized Kish score', fontsize=fs - 5)
+	ax.set_ylabel(r'$\chi^{2}_{red}$', fontsize=fs)
+	plt.tight_layout()
+	plt.savefig("chi2red_log_normalized_kish.png", dpi=400)
 
 	return
 
@@ -170,7 +211,7 @@ def plot_single_theta_scattering(bioen_data, theta, output_name):
 	return
 
 
-def plot_all_thetas_scattering(bioen_data, theta_series, output_name):
+def visualize_all_thetas_scattering(bioen_data, theta_series, output_name):
 	""" Plot single scattering profiles for all thetas from BioEN data."""
 	for theta in theta_series:
 		plot_single_theta_scattering(bioen_data, int(theta), output_name)
@@ -264,7 +305,8 @@ extract_scattering(bioen_data)
 extract_chi2_skl(bioen_data)
 extract_wopt_cumsum(bioen_data)
 visualize_chi2_skl(bioen_data)
+visualize_chi2_kish(bioen_data)
+visualize_all_thetas_scattering(bioen_data=bioen_data, theta_series=theta_series, output_name="ensemble")
 visualize_scattering_all_thetas(bioen_data)
 visualize_all_cum_dist(theta_series=theta_series, bioen_data=bioen_data)
 extract_weights(bioen_data=bioen_data, output_name="ensemble")
-plot_all_thetas_scattering(bioen_data=bioen_data, theta_series=theta_series, output_name="ensemble")
