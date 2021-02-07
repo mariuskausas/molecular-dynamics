@@ -156,14 +156,3 @@ def difference_fes(path_to_cv1, path_to_cv2, path_to_weights, bins, cv1_label, c
 
 	plt.savefig(output_name + ".png", dpi=300)
 	plt.show()
-
-
-path_to_cv1 = '/home/mariusk/Documents/papers.data/HOIP/manuscript.figures/making_figures/ensembles_RBR/2.bioen/HOIPwt/d1.txt'
-path_to_cv2 = '/home/mariusk/Documents/papers.data/HOIP/manuscript.figures/making_figures/ensembles_RBR/2.bioen/HOIPwt/d2.txt'
-path_to_weights = '/home/mariusk/Documents/papers.data/HOIP/manuscript.figures/making_figures/ensembles_RBR/2.bioen/HOIPwt/bioen_wopt_theta_100_HOIPwt_gromos54a8.txt'
-bins=100
-cv1_label = "D1"
-cv2_label = "D2"
-output_name = "fes_difference"
-
-difference_fes(path_to_cv1, path_to_cv2, path_to_weights, bins, cv1_label, cv2_label, output_name)
