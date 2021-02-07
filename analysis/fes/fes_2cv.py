@@ -66,7 +66,7 @@ def density(z):
 
 def free_energy(z):
     """
-    Transform probability density function into free energy.
+    Log-transform of the probability density function.
 
     Parameters
     ----------
