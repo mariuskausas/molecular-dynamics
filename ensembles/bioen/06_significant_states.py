@@ -19,7 +19,7 @@ def get_significant_indices(path_to_weights, std):
 
 
 def visualise_significant_weights(wopt, std):
-
+	""" Visualise significant states using standard deviation cutoff."""
 	tick_params = dict(labelsize=22, length=10, width=1)
 
 	fs = 20
